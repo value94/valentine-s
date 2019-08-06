@@ -5,7 +5,8 @@ var Qixi = function () {
         audio: {
             enable: true,
             playURl: "music/happy.wav",
-            cycleURL: "music/circulation.wav"
+            cycleURL: "music/circulation.wav",
+            lastmp4:"music/lastlive.mp3",
         },
         setTime: {
             walkToThird: 6000,
@@ -29,7 +30,7 @@ var Qixi = function () {
             "images/snowflake/snowflake6.png"
         ]
     };
-    var debug = true;
+    var debug = false;
     if (debug) {
         $.each(confi.setTime, function (key, val) {
             confi.setTime[key] = 500
@@ -69,9 +70,9 @@ var Qixi = function () {
     })();
     if (confi.audio.enable) {
         var audio1 = Hmlt5Audio(confi.audio.playURl);
-        audio1.end(function () {
-            Hmlt5Audio(confi.audio.cycleURL, true)
-        })
+        // audio1.end(function () {
+        //     Hmlt5Audio(confi.audio.cycleURL, true)
+        // })
     }
     var swipe = Swipe(container);
 
@@ -215,7 +216,12 @@ var Qixi = function () {
                 restoreWalk();
                 $boy.removeClass("boy-rotate")
                 $boy.addClass("boy-propose")
-
+                if (confi.audio.enable) {
+                    var audio1 = Hmlt5Audio(confi.audio.lastmp4);
+                    audio1.end(function () {
+                        Hmlt5Audio(confi.audio.lastmp4, true)
+                    })
+                }
                 BoyToTalk(function() {
                     $boy.addClass("boy-rotate");
                     girl.rotate();
@@ -303,9 +309,16 @@ var Qixi = function () {
 
     function BoyToTalk(callback) {
         var paper = [
-            "真的学渣 .",
-            "敢于面对惨淡的成绩",
-            "敢于正视辅导员的双眸 . . .",
+            "织女牵牛送夕阳，临看不觉鹊桥长。",
+            "最伤今夜离愁曲，遥对天涯愈断肠。",
+            "今天是牛郎和织女一年一会的日子，也是我们在一起的第530天",
+            "530个日夜，因为有你的陪伴，让我不再感到孤单",
+            "530个日夜，我们一起哭，一起笑，一起面对人生的艰难",
+            "还记得我小的时候，当别的孩子说他们长大要成为科学家，宇航员，作家时。",
+            "我总是说：“我只希望和自己爱的人，过完一生”。",
+            "但直到遇见你，我才真正体会到，这句话的含义。我想成为让你幸福的男人。",
+            "愿你三冬暖，愿你春不寒，愿你天黑有灯，下雨有伞。",
+            "因为未来的路上，一直有我相伴(=^▽^=)"
         ];
 
 
